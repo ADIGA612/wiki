@@ -1,0 +1,39 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Create New Entry
+{% endblock %}
+
+{% block body %}
+<h1>Create New Entry</h1>
+
+<form class="form form-group container justify-content-center"
+    action="{% if title %}{% url 'edit' title %}{% else %}{% url 'newentry' %}{% endif %}" method="post">
+    {% csrf_token %}
+
+    <div class="row form-row ">
+        <div class="col-2 mx-2"></div>
+        <div class="col-8 h4 text-danger ">{{error}}</div>
+    </div>
+
+    <div class="form-row container my-3">
+        <div class="col-2 mx-2">{{form.title.label}}</div>
+        <div class="col-8">{{form.title}}</div>
+        {{form.title.error}}
+    </div>
+    <div class="form-row container ">
+        <div class="col-2 mx-2">{{form.content.label}}</div>
+        <div class="col-8">{{form.content}}</div>
+        {{form.content.error}}
+    </div>
+    <div class="container col-6 ">
+        <div class="row  container justify-content-end">
+            <input class="btn m-1 btn-primary" type="button" value="Cancel" onclick="history.back();">
+            <input class="btn m-1 btn-primary" type="submit" value="Save">
+        </div>
+
+    </div>
+
+</form>
+
+{% endblock %}
